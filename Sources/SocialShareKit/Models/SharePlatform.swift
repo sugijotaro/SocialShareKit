@@ -19,13 +19,13 @@ public enum SharePlatform: Identifiable, CaseIterable, Sendable {
     public var icon: some View {
         switch self {
         case .x:
-            Image("x_icon")
+            Image("x_icon", bundle: Bundle.module)
                 .resizable()
         case .instagramStory:
-            Image("instagram_icon")
+            Image("instagram_icon", bundle: Bundle.module)
                 .resizable()
         case .line:
-            Image("line_icon")
+            Image("line_icon", bundle: Bundle.module)
                 .resizable()
         case .more:
             Image(systemName: "ellipsis")

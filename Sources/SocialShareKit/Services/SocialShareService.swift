@@ -54,6 +54,8 @@ public actor SocialShareService {
         await MainActor.run {
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url)
+            } else {
+                print("Failed to open LINE share URL")
             }
         }
     }
