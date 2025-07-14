@@ -8,7 +8,7 @@
 import UIKit
 
 actor InstagramSharer {
-    private let urlSchemeString = "instagram-stories://share"
+    private let urlScheme = URL(string: "instagram-stories://share")!
     
     enum OptionKeys: String {
         case stickerImage = "com.instagram.sharedSticker.stickerImage"
@@ -21,16 +21,7 @@ actor InstagramSharer {
     ///   - stickerImage: シェアするステッカー画像。
     ///   - topColor: 背景のグラデーション上部の色 (16進数文字列)。
     ///   - bottomColor: 背景のグラデーション下部の色 (16進数文字列)。
-    public func share(stickerImage: UIImage, topColor: String = "#000000", bottomColor: String = "#000000") async {
-        guard let urlScheme = URL(string: urlSchemeString) else {
-            print("Invalid URL Scheme for Instagram Stories.")
-            return
-        }
-        
-        guard await MainActor.run(body: { UIApplication.shared.canOpenURL(urlScheme) }) else {
-            print("Instagram app is not installed.")
-            return
-        }
+    public func share(stickerImage: UIImage, topColor: String = "#FFFFFF", bottomColor: String = "#FFFFFF") async {
         
         guard let imageData = stickerImage.pngData() else {
             print("Failed to convert image to PNG data.")
