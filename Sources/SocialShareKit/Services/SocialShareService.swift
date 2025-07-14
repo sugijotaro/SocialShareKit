@@ -23,8 +23,9 @@ public actor SocialShareService {
         
         guard let url = URL(string: "twitter://post?text=\(encodedText)") else { return }
         
+        saveImagePasteboard(image)
+        
         await MainActor.run {
-            UIPasteboard.general.image = image
             
             if UIApplication.shared.canOpenURL(url) {
                 UIApplication.shared.open(url)
@@ -79,6 +80,13 @@ public actor SocialShareService {
             }
             
             rootViewController.present(activityVC, animated: true, completion: nil)
+        }
+    }
+    
+    private func saveImagePasteboard(_ image: UIImage) {
+        Task {
+            let pastBoard: UIPasteboard = UIPasteboard.general
+            pastBoard.setData(image.jpegData(compressionQuality: 1.0)!, forPasteboardType: "public.png")
         }
     }
 }
