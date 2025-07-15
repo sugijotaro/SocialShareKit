@@ -7,7 +7,7 @@
 
 import UIKit
 
-actor InstagramSharer {
+public actor InstagramSharer {
     private let urlScheme = URL(string: "instagram-stories://share")!
     
     enum OptionKeys: String {
